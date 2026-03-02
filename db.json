@@ -1,12 +1,39 @@
 {
-    "assets":[
-        {"id":1,"name":"Macbook Pro","type":"laptop","status":"Assigned","assignedTo":"Akash"},
-        {"id":2,"name":"Dell Monitor","type":"Monitor","status":"Available","assignedTo":"null"},
-        {"id":3,"name":"iPhone 12","type":"Mobile","status":"Assigned","assignedTo":"Rohit"},
-        {"id":4,"name":"Logitech Mouse","type":"Accessory","status":"Available","assignedTo":"null"},
-        {"id":5,"name":"HP Laptop","type":"laptop","status":"Assigned","assignedTo":"Priya"}
-    ],
-    "users":[
-        {"id":1,"name":"Admin","role":"Admin"}
-    ]
+  "assets": [
+    {
+      "id": "1",
+      "name": "Macbook Pro",
+      "type": "laptop",
+      "status": "Assigned",
+      "assignedTo": "Akash"
+    },
+    {
+      "id": "2",
+      "name": "Dell Monitor",
+      "type": "Monitor",
+      "status": "Available",
+      "assignedTo": "null"
+    },
+    {
+      "id": "4",
+      "name": "Logitech Mouse",
+      "type": "Accessory",
+      "status": "Available",
+      "assignedTo": "null"
+    },
+    {
+      "id": "5",
+      "name": "HP Laptop",
+      "type": "laptop",
+      "status": "Assigned",
+      "assignedTo": "Priya"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "Admin",
+      "role": "Admin"
+    }
+  ]
 }

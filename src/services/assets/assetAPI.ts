@@ -15,7 +15,7 @@ export const assetAPI = {
         return response.data;
     },
     deleteAsset: async(id:number)=>{
-        await apiClient.delete(`/asset/${id}`);
+        await apiClient.delete(`/assets/${id}`);
         return id;
     }
 }
