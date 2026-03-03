@@ -1,8 +1,8 @@
 import "./App.css";
-import AssetsPage from "./pages/AssetsPage";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
-  return <AssetsPage />;
+  return <AppRoutes />;
 }
 
 export default App;
