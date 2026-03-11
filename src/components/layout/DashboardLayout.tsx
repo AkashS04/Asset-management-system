@@ -1,13 +1,12 @@
+import { Outlet } from "react-router-dom";
 import SideNav from "./SideNav";
 
-interface DashboardLayoutProps {
-  children: React.ReactNode;
-}
-const DashboardLayout = ({ children }: DashboardLayoutProps) => {
+
+const DashboardLayout = () => {
   return (
     <div className="flex min-h-screen">
       <SideNav />
-      <main className="flex-1 p-[20px] bg-[#f8fafc]">{children}</main>
+      <main className="flex-1 p-[20px] bg-[#f8fafc]"><Outlet /></main>
     </div>
   );
 };

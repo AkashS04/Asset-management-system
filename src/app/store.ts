@@ -1,8 +1,10 @@
 import {configureStore} from '@reduxjs/toolkit';
-import assetReducer from '../features/assets/assetSlice'
+import assetReducer from '../features/assets/assetSlice';
+import authReducer from '../features/auth/authSlice'
 export const store = configureStore({
     reducer:{
-        assets:assetReducer
+        assets:assetReducer,
+        auth:authReducer
     }
 });
 
