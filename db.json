@@ -1,13 +1,6 @@
 {
   "assets": [
     {
-      "id": "1",
-      "name": "Macbook Pro",
-      "type": "laptop",
-      "status": "Assigned",
-      "assignedTo": "Akash"
-    },
-    {
       "id": "2",
       "name": "Dell Monitor",
       "type": "Monitor",
@@ -27,13 +20,6 @@
       "type": "laptop",
       "status": "Assigned",
       "assignedTo": "Priya"
-    },
-    {
-      "id": "faf3",
-      "name": "Fingerprint Scanner",
-      "type": "Sensors",
-      "status": "Available",
-      "assignedTo": "Divya"
     }
   ],
   "users": [
