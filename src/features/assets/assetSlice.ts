@@ -1,38 +1,7 @@
-import {createSlice, createAsyncThunk, type PayloadAction} from '@reduxjs/toolkit';
+import {createSlice, type PayloadAction} from '@reduxjs/toolkit';
 import type {Asset} from '../../types/assetTypes';
-import {assetAPI} from '../../services/assets/assetAPI';
+import { addAsset, deleteAsset, fetchAssets, updateAsset } from './assetThunk';
 
-export const fetchAssets = createAsyncThunk(
-    "assets/fetchAssets",
-    async()=>{
-    const data = await assetAPI.getAssets();
-    return data;
-    }
-)
-
-export const addAsset = createAsyncThunk(
-    "assets/addAsset",
-    async (asset:Omit<Asset , "id"> )=>{
-        const data = await assetAPI.addAsset(asset);
-        return data;
-    }
-)
-
-export const updateAsset = createAsyncThunk(
-    "assets/updateAsset",
-    async (asset:Asset)=>{
-        const data= await assetAPI.updateAsset(asset);
-        return data;
-    }
-)
-
-export const deleteAsset = createAsyncThunk(
-    "assets/deleteAsset",
-    async (id:number)=>{
-        const data = await assetAPI.deleteAsset(id);
-        return data;
-    }
-)
 
 interface AssetState {
     assets: Asset[];
@@ -74,7 +43,7 @@ const assetSlice = createSlice(
         })
         .addCase(addAsset.rejected,(state,action)=>{
             state.loading=false;
-            state.error=action.error.message || "Failed to add Asset"
+            state.error=action.payload as string || "Failed to add Asset"
         })
         .addCase(updateAsset.pending,(state)=>{
             state.loading=true;
