@@ -27,6 +27,13 @@
       "type": "laptop",
       "status": "Assigned",
       "assignedTo": "Priya"
+    },
+    {
+      "id": "faf3",
+      "name": "Fingerprint Scanner",
+      "type": "Sensors",
+      "status": "Available",
+      "assignedTo": "Divya"
     }
   ],
   "users": [

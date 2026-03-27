@@ -8,7 +8,9 @@ export const apiClient = axios.create({
 });
 
 apiClient.interceptors.request.use((config) => {
-   if (config.url === "/users") return config;
+  
+  if (config.url === "/users") return config;
+
   const token = localStorage.getItem("accessToken");
   const expiry = localStorage.getItem("expiry");
 

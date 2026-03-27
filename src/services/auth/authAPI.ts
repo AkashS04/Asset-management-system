@@ -15,9 +15,9 @@ export const LoginAPI = async (email: string, password: string) => {
   const users = res.data;
   console.log("Login Response:", users);
 
-  if (users.length == 0) {
-    throw new Error("Invalid Credentials");
-  }
+  // if (users.length == 0) {
+  //   throw new Error("Invalid Credentials");
+  // }
 
   const accessToken = "fake-token-" + Date.now();
   const refreshToken = "fake-refresh-" + Date.now();
