@@ -22,7 +22,7 @@ export const LoginAPI = async (email: string, password: string) => {
   const accessToken = "fake-token-" + Date.now();
   const refreshToken = "fake-refresh-" + Date.now();
 
-  const expiry = Date.now() + 15000;
+  const expiry = Date.now() + 150000;
 
   localStorage.setItem("accessToken", accessToken);
   localStorage.setItem("refreshToken", refreshToken);

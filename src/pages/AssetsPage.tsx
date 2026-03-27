@@ -1,22 +1,48 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import type { Asset } from "../types/assetTypes";
-import { deleteAsset, fetchAssets } from "../features/assets/assetSlice";
+import {
+  addAsset,
+  deleteAsset,
+  fetchAssets,
+} from "../features/assets/assetThunk";
+import AddAssetForm from "../components/forms/asset/addAssetForm";
+import type { FormData } from "../types/addFormTypes";
 
 const AssetsPage = () => {
   const dispatch = useAppDispatch();
   const { assets, Loading, Error } = useAppSelector(
     (state: any) => state.assets,
   );
+  const [open, setOpen] = useState<boolean>(false);
+
   useEffect(() => {
     dispatch(fetchAssets());
   }, [dispatch]);
   const handleDelete = (id: number) => {
     dispatch(deleteAsset(id));
   };
+
+  const handleAdd = (data: FormData) => {
+    dispatch(addAsset(data));
+  };
   return (
     <div className="p-20px">
-        <h2>Assets</h2>
+      <div className="flex justify-between items-center ">
+        <h2 className="text-2xl font-bold">Assets</h2>
+        <button onClick={() => setOpen(!open)}>
+          {open ? "Close" : "Add Asset"}
+        </button>
+      </div>
+
+      <div
+        className={`transition-all duration-300 overflow-hidden mb-[24px] ${
+          open ? "max-h-[500px] opacity-100" : " max-h-0 opacity-0"
+        }`}
+      >
+        <AddAssetForm onSubmit={handleAdd} />
+      </div>
+
       {Loading && <div> Loading...</div>}
 
       {Error && <div className="text-red">{Error}</div>}
