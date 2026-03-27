@@ -3,11 +3,12 @@ import axios from "axios";
 export const apiClient = axios.create({
   baseURL: "http://localhost:5000",
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 });
 
 apiClient.interceptors.request.use((config) => {
+   if (config.url === "/users") return config;
   const token = localStorage.getItem("accessToken");
   const expiry = localStorage.getItem("expiry");
 
