@@ -1,13 +1,6 @@
 {
   "assets": [
     {
-      "id": "2",
-      "name": "Dell Monitor",
-      "type": "Monitor",
-      "status": "Available",
-      "assignedTo": "null"
-    },
-    {
       "id": "4",
       "name": "Logitech Mouse",
       "type": "Accessory",
@@ -20,6 +13,20 @@
       "type": "laptop",
       "status": "Assigned",
       "assignedTo": "Priya"
+    },
+    {
+      "id": "42e3",
+      "name": "Dell",
+      "type": "Laptop",
+      "status": "Returned",
+      "assignedTo": "Divya"
+    },
+    {
+      "id": "9675",
+      "name": "Lenovo",
+      "type": "Laptop",
+      "status": "Assigned",
+      "assignedTo": "Akash"
     }
   ],
   "users": [

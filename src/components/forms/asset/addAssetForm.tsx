@@ -1,39 +1,61 @@
 import { useForm } from "react-hook-form";
 import AddAssetFormFields from "./addAssetFormfields";
-import type { FormData } from "../../../types/addFormTypes";
-
+import type { AssetFormData } from "../../../types/assetTypes";
 
 interface props {
-  onSubmit: (data: FormData) => void;
+  mode: "add" | "edit";
+  defaultValues?: AssetFormData;
+  onSubmit: (data: AssetFormData) => void;
+  onCancel?: () => void;
 }
 
-export default function AddAssetForm({ onSubmit }: props) {
+export default function AddAssetForm({
+  mode,
+  defaultValues,
+  onSubmit,
+  onCancel,
+}: props) {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<FormData>();
+  } = useForm<AssetFormData>({ defaultValues });
 
-  const submitHandler = (data: FormData) => {
+  const submitHandler = (data: AssetFormData) => {
     onSubmit(data);
-    reset();
+    if (mode === "add") reset();
   };
+
+  const isEdit = mode === "edit";
 
   return (
     <>
-    <div className="max-w-[50%]">
-      <form onSubmit={handleSubmit(submitHandler)}>
-        <h2 className="text-xl font-semibold mb-3">Add Asset</h2>
-        <AddAssetFormFields register={register} errors={errors} />
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          {" "}
-          Add Asset
-        </button>
-      </form>
+      <div className="max-w-[50%]">
+        <form onSubmit={handleSubmit(submitHandler)}>
+          <h2 className="text-xl font-semibold mb-3">
+            {isEdit ? "Edit Asset" : "Add Asset"}
+          </h2>
+          <AddAssetFormFields register={register} errors={errors} />
+          <div className="flex gap-2 mt-2">
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-4 py-2 rounded"
+            >
+              {" "}
+              {isEdit ? "Edit Asset" : "Add Asset"}
+            </button>
+            {isEdit && onCancel && (
+              <button
+                type="button"
+                onClick={onCancel}
+                className="bg-gray-300 text-black px-4 py-2 rounded"
+              >
+                Cancel
+              </button>
+            )}
+          </div>
+        </form>
       </div>
     </>
   );

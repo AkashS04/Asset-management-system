@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import type { Asset } from "../types/assetTypes";
+import type { Asset , AssetFormData} from "../types/assetTypes";
 import {
   addAsset,
   deleteAsset,
   fetchAssets,
+  updateAsset,
 } from "../features/assets/assetThunk";
 import AddAssetForm from "../components/forms/asset/addAssetForm";
-import type { FormData } from "../types/addFormTypes";
 
 const AssetsPage = () => {
   const dispatch = useAppDispatch();
@@ -15,6 +15,7 @@ const AssetsPage = () => {
     (state: any) => state.assets,
   );
   const [open, setOpen] = useState<boolean>(false);
+   const [editingAsset, setEditingAsset] = useState<Asset | null>(null);
 
   useEffect(() => {
     dispatch(fetchAssets());
@@ -23,8 +24,15 @@ const AssetsPage = () => {
     dispatch(deleteAsset(id));
   };
 
-  const handleAdd = (data: FormData) => {
+  const handleAdd = (data: AssetFormData) => {
     dispatch(addAsset(data));
+  };
+
+  const handleUpdate = (data:  AssetFormData) => {
+    if (!editingAsset) return;
+    dispatch(updateAsset({ ...data, id: editingAsset.id }));
+
+    setEditingAsset(null);
   };
   return (
     <div className="p-20px">
@@ -40,8 +48,27 @@ const AssetsPage = () => {
           open ? "max-h-[500px] opacity-100" : " max-h-0 opacity-0"
         }`}
       >
-        <AddAssetForm onSubmit={handleAdd} />
+        <AddAssetForm mode="add" onSubmit={handleAdd} />
       </div>
+
+
+
+   {editingAsset && (
+        <div className="mb-6 border p-4 rounded bg-gray-50">
+          <AddAssetForm
+            mode="edit"
+            defaultValues={{           
+              name: editingAsset.name,
+              type: editingAsset.type,
+              status: editingAsset.status,
+              assignedTo: editingAsset.assignedTo,
+            }}
+            onSubmit={handleUpdate}
+            onCancel={() => setEditingAsset(null)}
+          />
+        </div>
+      )}
+
 
       {Loading && <div> Loading...</div>}
 
@@ -67,6 +94,9 @@ const AssetsPage = () => {
                 <td>{asset.type}</td>
                 <td>{asset.status}</td>
                 <td>{asset.assignedTo}</td>
+                <td>
+                  <button onClick={()=> setEditingAsset(asset)}>Edit</button>
+                </td>
                 <td>
                   <button onClick={() => handleDelete(asset.id)}>Delete</button>
                 </td>

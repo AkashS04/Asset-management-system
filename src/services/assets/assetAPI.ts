@@ -1,12 +1,12 @@
 import {apiClient} from '../apiClient';
-import type {Asset} from '../../types/assetTypes';
+import type {Asset, AssetFormData} from '../../types/assetTypes';
 
 export const assetAPI = {
     getAssets:async()=>{
         const response = await apiClient.get<Asset[]>('/assets');
         return response.data;
     },
-    addAsset:async(asset:Omit<Asset, 'id'>)=>{
+    addAsset:async(asset:AssetFormData)=>{
         const response =await apiClient.post("/assets", asset);
         return response.data;
     },
