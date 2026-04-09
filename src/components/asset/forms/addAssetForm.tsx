@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import AddAssetFormFields from "./addAssetFormfields";
+import AddAssetFormFields from "./addAssetFormFields";
 import type { AssetFormData } from "../../../types/assetTypes";
 
 interface props {
