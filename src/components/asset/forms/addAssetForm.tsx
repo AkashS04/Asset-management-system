@@ -1,12 +1,14 @@
 import { useForm } from "react-hook-form";
 import AddAssetFormFields from "./addAssetFormFields";
 import type { AssetFormData } from "../../../types/assetTypes";
+import { useEffect } from "react";
 
 interface props {
   mode: "add" | "edit";
   defaultValues?: AssetFormData;
   onSubmit: (data: AssetFormData) => void;
   onCancel?: () => void;
+  open?:boolean
 }
 
 export default function AddAssetForm({
@@ -14,6 +16,7 @@ export default function AddAssetForm({
   defaultValues,
   onSubmit,
   onCancel,
+  open
 }: props) {
   const {
     register,
@@ -28,6 +31,12 @@ export default function AddAssetForm({
   };
 
   const isEdit = mode === "edit";
+
+  useEffect(() => {
+  if (!open) {
+    reset()
+  }
+}, [open, reset]);
 
   return (
     <>
@@ -49,7 +58,7 @@ export default function AddAssetForm({
               <button
                 type="button"
                 onClick={onCancel}
-                className="bg-gray-300 text-black px-4 py-2 rounded"
+                className="bg-gray-300 text-black px-4 py-2 rounded cursor-pointer"
               >
                 Cancel
               </button>

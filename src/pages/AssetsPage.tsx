@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import type { Asset, AssetFormData } from "../types/assetTypes";
 import {
   addAsset,
+  bulkAsset,
   deleteAsset,
   fetchAssets,
   updateAsset,
@@ -11,6 +12,7 @@ import AddAssetForm from "../components/asset/forms/addAssetForm";
 import AssetTable from "../components/asset/table/AssetTable";
 import { useAssetsPipeline } from "../features/assets/useAssetPipeline";
 import { useDebounce } from "../features/assets/useDebounce";
+import BulkUpload from "../components/bulkUpload/BulkUpload";
 type sortType = "latest" | "oldest" | "updated" | "name-asc" | "name-desc";
 type filterType = "All" | "Available" | "Assigned" | "Repaired" | "Returned";
 const AssetsPage = () => {
@@ -91,12 +93,24 @@ const AssetsPage = () => {
             </select>
           </div>
         </div>
-        <button
-          className="bg-blue-500 p-2 rounded-md cursor-pointer text-white"
-          onClick={() => setOpen(!open)}
-        >
-          {open ? "Close" : "Add Asset"}
-        </button>
+        <div className="w-[100px] flex justify-end">
+          <button
+            className="bg-blue-500 p-2 w-[100px] rounded-md cursor-pointer text-white"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? "Close" : "Add Asset"}
+          </button>
+        </div>
+      </div>
+
+      <div className="mt-8 mb-2">
+        <BulkUpload
+          onUpload={(data: any) => {
+            data.forEach((asset: Asset[]) => {
+              dispatch(bulkAsset(asset));
+            });
+          }}
+        />
       </div>
 
       <div
@@ -104,7 +118,7 @@ const AssetsPage = () => {
           open ? "max-h-[500px] opacity-100" : " max-h-0 opacity-0"
         }`}
       >
-        <AddAssetForm mode="add" onSubmit={handleAdd} />
+        <AddAssetForm mode="add" open={open} onSubmit={handleAdd} />
       </div>
 
       <div

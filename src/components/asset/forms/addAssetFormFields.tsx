@@ -1,4 +1,5 @@
 import type { FieldErrors, UseFormRegister } from "react-hook-form";
+import { addAssetValidation } from "../../../validations/assets/addAssetValidaiton";
 
 type props = {
   register: UseFormRegister<any>;
@@ -9,7 +10,7 @@ export default function AddAssetFormFields({ register, errors }: props) {
     <>
       <div className="mb-4">
         <input
-          {...register("name")}
+          {...register("name", addAssetValidation.name)}
           placeholder="Asset Name"
           className="w-full p-2 border rounded"
         />
@@ -21,7 +22,7 @@ export default function AddAssetFormFields({ register, errors }: props) {
       </div>
       <div className="mb-4">
         <input
-          {...register("type")}
+          {...register("type", addAssetValidation.type)}
           placeholder="Asset type"
           className="w-full p-2 border rounded"
         />
@@ -45,7 +46,7 @@ export default function AddAssetFormFields({ register, errors }: props) {
         )}
       </div>
       <div className="mb-4">
-        <input {...register("assignedTo")} placeholder="Assigned person" className="w-full p-2 border rounded"/>
+        <input {...register("assignedTo",addAssetValidation.assignedTo)} placeholder="Assigned person" className="w-full p-2 border rounded"/>
         {errors.assignedTo && (
           <p className="text-red-500 text-sm">
             {errors.assignedTo.message as string}

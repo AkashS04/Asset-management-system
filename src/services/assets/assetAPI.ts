@@ -16,6 +16,10 @@ export const assetAPI = {
     const response = await apiClient.post("/assets", newAsset);
     return response.data;
   },
+  bulkAsset: async (asset:AssetFormData[])=>{
+    const response= await apiClient.post("/assets",asset);
+    return response.data;
+  },
   updateAsset: async (asset: Asset) => {
     const now = new Date().toString();
     const updatedAsset ={ ...asset, updatedAt:now}

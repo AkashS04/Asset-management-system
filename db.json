@@ -44,6 +44,42 @@
       "assignedTo": "Priya",
       "createdAt": "Thu Apr 09 2026 15:05:20 GMT+0530 (India Standard Time)",
       "updatedAt": "Thu Apr 09 2026 15:05:20 GMT+0530 (India Standard Time)"
+    },
+    {
+      "id": "79124d8e-ed5c-42ae-8e52-ef950c4d064b",
+      "name": "Dell",
+      "type": "Server",
+      "status": "Assigned",
+      "assignedTo": "Akash",
+      "createdAt": "2026-04-10T10:32:14.029Z",
+      "updatedAt": "2026-04-10T10:32:14.029Z"
+    },
+    {
+      "id": "7a859bee-d427-4db7-a2ad-497dc242fc15",
+      "name": "Dell",
+      "type": "Server",
+      "status": "Assigned",
+      "assignedTo": "Tamil",
+      "createdAt": "2026-04-10T10:32:14.029Z",
+      "updatedAt": "2026-04-10T10:32:14.029Z"
+    },
+    {
+      "id": "8e2745a9-8a9c-4b2a-b44c-1edbdbfa02ab",
+      "name": "HP",
+      "type": "Laptop",
+      "status": "Assigned",
+      "assignedTo": "Tamil",
+      "createdAt": "2026-04-10T10:32:14.029Z",
+      "updatedAt": "2026-04-10T10:32:14.029Z"
+    },
+    {
+      "id": "110ec2c9-9d9f-454c-822b-93cb44b9a64b",
+      "name": "Lenovo",
+      "type": "Server",
+      "status": "Assigned",
+      "assignedTo": "Akash",
+      "createdAt": "2026-04-10T10:32:14.029Z",
+      "updatedAt": "2026-04-10T10:32:14.029Z"
     }
   ],
   "users": [

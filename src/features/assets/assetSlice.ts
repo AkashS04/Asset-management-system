@@ -1,6 +1,6 @@
 import {createSlice, type PayloadAction} from '@reduxjs/toolkit';
 import type {Asset} from '../../types/assetTypes';
-import { addAsset, deleteAsset, fetchAssets, updateAsset } from './assetThunk';
+import { addAsset, bulkAsset, deleteAsset, fetchAssets, updateAsset } from './assetThunk';
 
 
 interface AssetState {
@@ -44,6 +44,19 @@ const assetSlice = createSlice(
         .addCase(addAsset.rejected,(state,action)=>{
             state.loading=false;
             state.error=action.payload as string || "Failed to add Asset"
+        })
+        .addCase( bulkAsset.pending,(state:AssetState)=>{
+            state.loading= true;
+            state.error = null
+        }
+        )
+        .addCase(bulkAsset.fulfilled, (state:AssetState, action:PayloadAction<Asset[]>)=>{
+            state.loading = false;
+            state.assets.push(...action.payload)
+        })
+        .addCase(bulkAsset.rejected,(state, action)=>{
+            state.loading=false;
+            state.error = action.payload as string || "Failed to Add Assets"
         })
         .addCase(updateAsset.pending,(state)=>{
             state.loading=true;

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { assetAPI } from "../../services/assets/assetAPI";
-import type { Asset } from "../../types/assetTypes";
+import type { Asset, AssetFormData } from "../../types/assetTypes";
 
 export const fetchAssets = createAsyncThunk(
   "assets/fetchAssets",
@@ -25,6 +25,19 @@ export const addAsset = createAsyncThunk(
     }
   },
 );
+
+export const bulkAsset = createAsyncThunk(
+  "assets/bulkAsset",
+  async (asset:AssetFormData[],{rejectWithValue})=>{
+    try{
+      const res = await assetAPI.bulkAsset(asset);
+      return res;
+    }
+    catch(err:any){
+      return rejectWithValue(err.message || "Upload Failed")
+    }
+  }
+)
 
 export const updateAsset = createAsyncThunk(
   "assets/updateAsset",

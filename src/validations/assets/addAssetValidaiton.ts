@@ -3,13 +3,13 @@ export const addAssetValidation ={
         required:"Asset name is required",
         minLength:{
             value:3,
-            required:"Minimum 3 characters"
-        }
+            message:"Minimum 3 characters"
+        },
     },
     type:{
         required:"Type is required"
     },
-    AssignedTo:{
+    assignedTo:{
         required:"Assigned person is required"
     }
 }
