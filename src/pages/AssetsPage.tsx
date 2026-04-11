@@ -13,6 +13,7 @@ import AssetTable from "../components/asset/table/AssetTable";
 import { useAssetsPipeline } from "../features/assets/useAssetPipeline";
 import { useDebounce } from "../features/assets/useDebounce";
 import BulkUpload from "../components/bulkUpload/BulkUpload";
+import Modal from "../components/ui/Modal";
 type sortType = "latest" | "oldest" | "updated" | "name-asc" | "name-desc";
 type filterType = "All" | "Available" | "Assigned" | "Repaired" | "Returned";
 const AssetsPage = () => {
@@ -59,7 +60,7 @@ const AssetsPage = () => {
         <div className="flex bg-gray-100 border">
           <div className="">
             <input
-              className="border-gray-400 p-2"
+              className="border-gray-200 focus-visble:outline-none p-2"
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -113,19 +114,11 @@ const AssetsPage = () => {
         />
       </div>
 
-      <div
-        className={`transition-all duration-300 overflow-hidden mb-[24px] ${
-          open ? "max-h-[500px] opacity-100" : " max-h-0 opacity-0"
-        }`}
-      >
+      <Modal isOpen={open} onClose={() => setOpen(false)}>
         <AddAssetForm mode="add" open={open} onSubmit={handleAdd} />
-      </div>
+      </Modal>
 
-      <div
-        className={`transition-all duration-300 overflow-hidden mb-[24px] ${
-          editingAsset ? "max-h-[500px] opacity-100" : " max-h-0 opacity-0"
-        }`}
-      >
+      <Modal isOpen={!!editingAsset} onClose={() => setEditingAsset(null)}>
         {editingAsset && (
           <AddAssetForm
             mode="edit"
@@ -141,7 +134,7 @@ const AssetsPage = () => {
             onCancel={() => setEditingAsset(null)}
           />
         )}
-      </div>
+      </Modal>
 
       {Loading && <div> Loading...</div>}
 

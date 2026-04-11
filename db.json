@@ -28,58 +28,49 @@
       "updatedAt": "2026-04-09T10:15:00.000Z"
     },
     {
-      "name": "Macbook",
-      "type": "Laptop",
-      "status": "Available",
-      "assignedTo": "Null",
-      "createdAt": "2026-04-08T10:20:00.000Z",
-      "updatedAt": "Thu Apr 09 2026 14:11:51 GMT+0530 (India Standard Time)",
-      "id": "0b5e"
-    },
-    {
-      "id": "32aa",
+      "id": "cf564791-3e10-4525-a22e-d34eb7c04a32",
       "name": "HP",
       "type": "Printer",
-      "status": "Available",
-      "assignedTo": "Priya",
-      "createdAt": "Thu Apr 09 2026 15:05:20 GMT+0530 (India Standard Time)",
-      "updatedAt": "Thu Apr 09 2026 15:05:20 GMT+0530 (India Standard Time)"
+      "status": "Repaired",
+      "assignedTo": "Null",
+      "createdAt": "2026-04-11T07:37:13.534Z",
+      "updatedAt": "2026-04-11T07:37:13.534Z"
     },
     {
-      "id": "79124d8e-ed5c-42ae-8e52-ef950c4d064b",
-      "name": "Dell",
-      "type": "Server",
-      "status": "Assigned",
-      "assignedTo": "Akash",
-      "createdAt": "2026-04-10T10:32:14.029Z",
-      "updatedAt": "2026-04-10T10:32:14.029Z"
-    },
-    {
-      "id": "7a859bee-d427-4db7-a2ad-497dc242fc15",
-      "name": "Dell",
-      "type": "Server",
-      "status": "Assigned",
-      "assignedTo": "Tamil",
-      "createdAt": "2026-04-10T10:32:14.029Z",
-      "updatedAt": "2026-04-10T10:32:14.029Z"
-    },
-    {
-      "id": "8e2745a9-8a9c-4b2a-b44c-1edbdbfa02ab",
+      "id": "e681279e-1f94-4e8d-a122-47d82f0d9324",
       "name": "HP",
       "type": "Laptop",
       "status": "Assigned",
       "assignedTo": "Tamil",
-      "createdAt": "2026-04-10T10:32:14.029Z",
-      "updatedAt": "2026-04-10T10:32:14.029Z"
+      "createdAt": "2026-04-11T07:37:13.534Z",
+      "updatedAt": "2026-04-11T07:37:13.534Z"
     },
     {
-      "id": "110ec2c9-9d9f-454c-822b-93cb44b9a64b",
+      "id": "afc060d7-990c-4375-915a-92b740775aad",
+      "name": "Dell",
+      "type": "Server",
+      "status": "Assigned",
+      "assignedTo": "Tamil",
+      "createdAt": "2026-04-11T07:37:13.534Z",
+      "updatedAt": "2026-04-11T07:37:13.534Z"
+    },
+    {
+      "id": "6b5d17e4-48ec-45c5-9cd4-9d603090988c",
       "name": "Lenovo",
       "type": "Server",
       "status": "Assigned",
       "assignedTo": "Akash",
-      "createdAt": "2026-04-10T10:32:14.029Z",
-      "updatedAt": "2026-04-10T10:32:14.029Z"
+      "createdAt": "2026-04-11T07:37:13.534Z",
+      "updatedAt": "2026-04-11T07:37:13.534Z"
+    },
+    {
+      "id": "efda4e4f-2619-422a-8632-465e3f277d26",
+      "name": "Dell",
+      "type": "Server",
+      "status": "Assigned",
+      "assignedTo": "Akash",
+      "createdAt": "2026-04-11T07:37:13.534Z",
+      "updatedAt": "2026-04-11T07:37:13.534Z"
     }
   ],
   "users": [

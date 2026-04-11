@@ -61,7 +61,7 @@ export default function BulkUpload({ onUpload }: any) {
   }
 
   return (
-    <div className="">
+    <div className="mb-4">
       <DropZone onFileSelect={processFile} resetTrigger={resetKey} />
       {loading && <p>Processing File...</p>}
       {errors?.length > 0 && <ErrorReport errors={errors} />}

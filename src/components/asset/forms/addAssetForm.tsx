@@ -40,16 +40,15 @@ export default function AddAssetForm({
 
   return (
     <>
-      <div className="max-w-[50%]">
         <form onSubmit={handleSubmit(submitHandler)}>
           <h2 className="text-xl font-semibold mb-3">
             {isEdit ? "Edit Asset" : "Add Asset"}
           </h2>
           <AddAssetFormFields register={register} errors={errors} />
-          <div className="flex gap-2 mt-2">
+          <div className="flex justify-end gap-2 mt-2">
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded"
+              className="bg-blue-500 text-white px-4 py-2 cursor-pointer rounded"
             >
               {" "}
               {isEdit ? "Edit Asset" : "Add Asset"}
@@ -65,7 +64,7 @@ export default function AddAssetForm({
             )}
           </div>
         </form>
-      </div>
+
     </>
   );
 }

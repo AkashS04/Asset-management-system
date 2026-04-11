@@ -32,7 +32,7 @@ export default function DropZone({ onFileSelect, resetTrigger }: props) {
         onClick={handleClick}
         onDrag={handleDrop}
         onDragOver={(e) => e.preventDefault()}
-        className="p-[30px] border-[2px] border-dashed text-center text-green cursor-pointer"
+        className="p-[30px] border-[2px] border-dashed border-gray-300 text-center text-green cursor-pointer"
       >
         Drag & Upload File Here
         <input
