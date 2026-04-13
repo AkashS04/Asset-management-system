@@ -28,13 +28,13 @@
       "updatedAt": "2026-04-09T10:15:00.000Z"
     },
     {
-      "id": "cf564791-3e10-4525-a22e-d34eb7c04a32",
       "name": "HP",
       "type": "Printer",
-      "status": "Repaired",
-      "assignedTo": "Null",
+      "status": "Assigned",
+      "assignedTo": "ABI",
       "createdAt": "2026-04-11T07:37:13.534Z",
-      "updatedAt": "2026-04-11T07:37:13.534Z"
+      "updatedAt": "Mon Apr 13 2026 17:13:39 GMT+0530 (India Standard Time)",
+      "id": "cf564791-3e10-4525-a22e-d34eb7c04a32"
     },
     {
       "id": "e681279e-1f94-4e8d-a122-47d82f0d9324",

@@ -2,8 +2,8 @@ export const addAssetValidation ={
     name:{
         required:"Asset name is required",
         minLength:{
-            value:3,
-            message:"Minimum 3 characters"
+            value:2,
+            message:"Minimum 2 characters"
         },
     },
     type:{

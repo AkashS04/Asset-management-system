@@ -14,6 +14,7 @@ import { useAssetsPipeline } from "../features/assets/useAssetPipeline";
 import { useDebounce } from "../features/assets/useDebounce";
 import BulkUpload from "../components/bulkUpload/BulkUpload";
 import Modal from "../components/ui/Modal";
+import { exportAssetsToPDF } from "../utils/exportAssetsToPDF";
 type sortType = "latest" | "oldest" | "updated" | "name-asc" | "name-desc";
 type filterType = "All" | "Available" | "Assigned" | "Repaired" | "Returned";
 const AssetsPage = () => {
@@ -55,65 +56,77 @@ const AssetsPage = () => {
   });
   return (
     <div className="p-20px">
-      <div className="flex justify-between items-center ">
-        <h2 className="text-2xl font-bold">Assets</h2>
-        <div className="flex bg-gray-100 border">
-          <div className="">
-            <input
-              className="border-gray-200 focus-visble:outline-none p-2"
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search Assets"
-            />
+      <div className="">
+        <div className="flex justify-between items-center ">
+          <h2 className="text-2xl font-bold">Assets</h2>
+          <div className="flex bg-gray-100 border">
+            <div className="">
+              <input
+                className="border-gray-200 focus-visble:outline-none p-2"
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search Assets"
+              />
+            </div>
+            <div className="border-l">
+              <select
+                className="bg-gray-100 px-4 py-2 text-center cursor-pointer"
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value as any)}
+              >
+                <option value="All">All</option>
+                <option value="Available">Available</option>
+                <option value="Assigned">Assigned</option>
+                <option value="Repaired">Repaired</option>
+                <option value="Returned">Returned</option>
+              </select>
+            </div>
+            <div className="border-l">
+              <select
+                className="bg-gray-100 px-4 py-2 text-center cursor-pointer"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as any)}
+              >
+                <option value="latest">Latest</option>
+                <option value="oldest">Oldest</option>
+                <option value="updated">Recently Updated</option>
+                <option value="name-asc">Name A-Z</option>
+                <option value="name-desc">Name Z-A</option>
+              </select>
+            </div>
           </div>
-          <div className="border-l">
-            <select
-              className="bg-gray-100 px-4 py-2 text-center cursor-pointer"
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value as any)}
+
+          <div className=" flex gap-4 justify-end">
+            {processedAssets.length > 0 && (
+              <button
+                className="bg-green-700 p-2 rounded-md cursor-pointer text-white"
+                onClick={() => exportAssetsToPDF(processedAssets)}
+                disabled={processedAssets.length === 0}
+              >
+                Download
+              </button>
+            )}
+
+            <button
+              className="bg-blue-500 p-2 w-[100px] rounded-md cursor-pointer text-white"
+              onClick={() => setOpen(!open)}
             >
-              <option value="All">All</option>
-              <option value="Available">Available</option>
-              <option value="Assigned">Assigned</option>
-              <option value="Repaired">Repaired</option>
-              <option value="Returned">Returned</option>
-            </select>
-          </div>
-          <div className="border-l">
-            <select
-              className="bg-gray-100 px-4 py-2 text-center cursor-pointer"
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as any)}
-            >
-              <option value="latest">Latest</option>
-              <option value="oldest">Oldest</option>
-              <option value="updated">Recently Updated</option>
-              <option value="name-asc">Name A-Z</option>
-              <option value="name-desc">Name Z-A</option>
-            </select>
+              {open ? "Close" : "Add Asset"}
+            </button>
           </div>
         </div>
-        <div className="w-[100px] flex justify-end">
-          <button
-            className="bg-blue-500 p-2 w-[100px] rounded-md cursor-pointer text-white"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? "Close" : "Add Asset"}
-          </button>
+
+        <div className="mt-8 mb-2">
+          <BulkUpload
+            onUpload={(data: any) => {
+              data.forEach((asset: Asset[]) => {
+                dispatch(bulkAsset(asset));
+              });
+            }}
+          />
         </div>
       </div>
-
-      <div className="mt-8 mb-2">
-        <BulkUpload
-          onUpload={(data: any) => {
-            data.forEach((asset: Asset[]) => {
-              dispatch(bulkAsset(asset));
-            });
-          }}
-        />
-      </div>
-
       <Modal isOpen={open} onClose={() => setOpen(false)}>
         <AddAssetForm mode="add" open={open} onSubmit={handleAdd} />
       </Modal>
