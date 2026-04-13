@@ -64,7 +64,7 @@ export default function LoginForm({
 
         <button
           type="submit"
-          className="bg-blue-500 text-white text-gray-600 p-2 rounded"
+          className="bg-blue-500 text-white text-gray-600 p-2 cursor-pointer rounded"
           disabled={loading}
         >
           {loading ? "Signing in..." : "Login"}
