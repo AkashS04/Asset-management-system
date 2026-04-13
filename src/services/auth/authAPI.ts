@@ -1,23 +1,23 @@
 import { apiClient } from "../apiClient";
-type User = {
+export type User = {
   id: string;
   name: string;
   email: string;
   role: string;
 };
-export const LoginAPI = async (email: string, password: string) => {
-  const res = await apiClient.get<User[]>("/users", {
-    params: {
-      email,
-      password,
-    },
-  });
-  const users = res.data;
-  console.log("Login Response:", users);
 
-  // if (users.length == 0) {
-  //   throw new Error("Invalid Credentials");
-  // }
+export type LoginResult={
+user:User;
+token: string
+}
+export const LoginAPI = async (email: string, password: string): Promise<LoginResult> => {
+  const { data } = await apiClient.get<(User & { password: string })[]>("/users");
+
+  const user = data.find(
+    (u) => u.email === email.trim() && u.password === password
+  );
+
+  if (!user) throw new Error("Invalid Credentials");
 
   const accessToken = "fake-token-" + Date.now();
   const refreshToken = "fake-refresh-" + Date.now();
@@ -28,8 +28,6 @@ export const LoginAPI = async (email: string, password: string) => {
   localStorage.setItem("refreshToken", refreshToken);
   localStorage.setItem("expiry", expiry.toString());
 
-  return {
-    users: users,
-    token: accessToken,
-  };
+  const { password: _, ...safeUser } = user;
+  return { user: safeUser, token: accessToken };
 };

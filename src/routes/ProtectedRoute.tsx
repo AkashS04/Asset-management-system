@@ -1,9 +1,8 @@
 import { Navigate, Outlet } from "react-router-dom"
+import { useAppSelector } from "../app/hooks"
+import { selectIsAuthenticated } from "../features/auth/authSlice"
 
 export default function ProtectedRoute(){
-    const token =  localStorage.getItem('accessToken')
-    if (!token){
-        return <Navigate to='/login' replace />
-    }
-    return <Outlet />
+    const isAuthenticated = useAppSelector(selectIsAuthenticated)
+    return isAuthenticated ? <Outlet /> : <Navigate to='/login' replace />
 }

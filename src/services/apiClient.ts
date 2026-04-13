@@ -1,28 +1,28 @@
 import axios from "axios";
 
 export const apiClient = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: import.meta.env.VITE_API_URL ?? "http://localhost:5000",
   headers: {
     'Content-Type': 'application/json',
   },
 });
-
+const PUBLIC_URLS = ["/users"]
 apiClient.interceptors.request.use((config) => {
   
-  if (config.url === "/users") return config;
+  if (PUBLIC_URLS.some((url)=> config.url?.includes(url))) return config;
 
-  const token = localStorage.getItem("accessToken");
   const expiry = localStorage.getItem("expiry");
 
   if (expiry && Date.now() > Number(expiry)) {
     console.log("Token expired");
 
     localStorage.clear();
-    window.location.href = "/login";
+    window.dispatchEvent(new Event("auth:expired"))
 
-    return Promise.reject("Token expired");
+    return Promise.reject(new Error("Token expired"));
   }
 
+  const token = localStorage.getItem("accessToken");
   if (token && config.headers) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -31,13 +31,13 @@ apiClient.interceptors.request.use((config) => {
 });
 
 apiClient.interceptors.response.use(
-  (response) => response,
-  async (error) => {
+  (res) => res,
+  (error) => {
     if (error.response?.status === 401) {
       console.log("Unauthorized");
 
       localStorage.clear();
-      window.location.href = "/login";
+      window.dispatchEvent(new Event("auth:expired"))
     }
 
     return Promise.reject(error);
