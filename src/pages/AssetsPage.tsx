@@ -160,6 +160,7 @@ const AssetsPage = () => {
           assets={processedAssets}
           handleDelete={handleDelete}
           onEdit={setEditingAsset}
+          showActions={true}
         />
       )}
     </div>

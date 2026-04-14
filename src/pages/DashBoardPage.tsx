@@ -1,12 +1,22 @@
-import { useAppSelector } from "../app/hooks";
+import { useEffect } from "react";
 import AssetTable from "../components/asset/table/AssetTable";
 import StatusCard from "../components/dashboard/StatusCard";
 import StatusPieChart from "../components/dashboard/StatusPieChart";
 import TypeBarChart from "../components/dashboard/TypeBarChart";
 import { useDashBoardData } from "../features/dashboard/useDashboardData";
+import { fetchAssets } from "../features/assets/assetThunk";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 
 export default function DashBoardPage() {
-  const { assets } = useAppSelector((status: any) => status.assets);
+  const dispatch = useAppDispatch();
+
+  const { assets } = useAppSelector((state: any) => state.assets);
+  useEffect(() => {
+    if (assets.length == 0) {
+      dispatch(fetchAssets());
+    }
+  }, [dispatch, assets]);
+
   const {
     total,
     assigned,
@@ -16,6 +26,8 @@ export default function DashBoardPage() {
     statusData,
     typeData,
   } = useDashBoardData(assets);
+
+  console.log(typeData);
 
   return (
     <div className="p-6 space-y-6">
@@ -36,6 +48,7 @@ export default function DashBoardPage() {
           assets={assets.slice(0, 5)}
           handleDelete={() => {}}
           onEdit={() => {}}
+          showActions={false}
         />
       </div>
     </div>

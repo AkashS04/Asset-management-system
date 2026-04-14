@@ -62,24 +62,6 @@
       "assignedTo": "Priya",
       "createdAt": "Tue Apr 14 2026 12:24:48 GMT+0530 (India Standard Time)",
       "updatedAt": "Tue Apr 14 2026 12:24:48 GMT+0530 (India Standard Time)"
-    },
-    {
-      "id": "7341",
-      "name": "Dell",
-      "type": "Server",
-      "status": "Assigned",
-      "assignedTo": "Rahul",
-      "createdAt": "Tue Apr 14 2026 12:25:48 GMT+0530 (India Standard Time)",
-      "updatedAt": "Tue Apr 14 2026 12:25:48 GMT+0530 (India Standard Time)"
-    },
-    {
-      "id": "16cb",
-      "name": "HP",
-      "type": "Laptop",
-      "status": "Repaired",
-      "assignedTo": "Rahul",
-      "createdAt": "Tue Apr 14 2026 12:26:47 GMT+0530 (India Standard Time)",
-      "updatedAt": "Tue Apr 14 2026 12:26:47 GMT+0530 (India Standard Time)"
     }
   ],
   "users": [

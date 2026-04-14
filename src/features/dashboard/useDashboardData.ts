@@ -11,12 +11,12 @@ export const useDashBoardData = (assets: Asset[]) => {
       typeMap[asset.type] = (typeMap[asset.type] || 0) + 1;
     });
 
-    const statusData = Object.entries(statusMap).map((name, value) => ({
+    const statusData = Object.entries(statusMap).map(([name, value]) => ({
       name,
       value,
     }));
 
-    const typeData = Object.entries(typeMap).map((name, value) => ({
+    const typeData = Object.entries(typeMap).map(([name, value]) => ({
       name,
       value,
     }));
