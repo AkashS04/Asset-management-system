@@ -6,7 +6,7 @@ const DashboardLayout = () => {
   return (
     <div className="flex min-h-screen">
       <SideNav />
-      <main className="flex-1 p-[20px] bg-[#f8fafc]"><Outlet /></main>
+      <main className="flex-1 p-[20px] bg-[#f8fafc] ml-60"><Outlet /></main>
     </div>
   );
 };

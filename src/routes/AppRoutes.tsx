@@ -12,9 +12,7 @@ import LoginPage from "../pages/LoginPage";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { logout } from "../features/auth/authSlice";
-const DashboardHome = () => {
-  return <h2>Welcome to Dashboard</h2>;
-};
+import DashBoardPage from "../pages/DashBoardPage";
 
 function AuthExpireWatcher() {
   const dispatch = useDispatch();
@@ -38,7 +36,7 @@ const AppRoutes = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route element={<ProtectedRoute />}>
           <Route element={<DashboardLayout />}>
-            <Route path="/dashboard" element={<DashboardHome />} />
+            <Route path="/dashboard" element={<DashBoardPage />} />
             <Route path="/assets" element={<AssetsPage />} />
           </Route>
         </Route>

@@ -5,7 +5,7 @@ const SideNav = () => {
 
   const dispatch =useDispatch()
   return (
-    <aside className="w-60 bg-slate-800 text-white p-5 flex flex-col justify-between min-h-screen">
+    <aside className="w-60 bg-slate-800 text-white p-5 flex fixed flex-col justify-between min-h-screen">
       <div className="flex flex-col">
         <h1 className="text-xl font-semibold mb-6">AMS</h1>
 
