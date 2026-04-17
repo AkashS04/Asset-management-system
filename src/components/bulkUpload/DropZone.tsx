@@ -1,10 +1,10 @@
-import { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 
 type props = {
   onFileSelect: (file: File) => void;
   resetTrigger: number;
 };
-export default function DropZone({ onFileSelect, resetTrigger }: props) {
+const DropZone = ({ onFileSelect, resetTrigger }: props) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -13,9 +13,12 @@ export default function DropZone({ onFileSelect, resetTrigger }: props) {
     }
   }, [resetTrigger]);
 
-  const handleClick = () => {
-    fileInputRef.current?.click();
-  };
+
+const handleClick = (e: React.MouseEvent) => {
+  e.stopPropagation(); 
+  fileInputRef.current?.click();
+};
+
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
@@ -26,12 +29,17 @@ export default function DropZone({ onFileSelect, resetTrigger }: props) {
     const file = e.target?.files?.[0];
     if (file) onFileSelect(file);
   };
+
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+}, []);
+
   return (
     <>
       <div
         onClick={handleClick}
-        onDrag={handleDrop}
-        onDragOver={(e) => e.preventDefault()}
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
         className="p-[30px] border-[2px] border-dashed border-gray-300 text-center text-green cursor-pointer"
       >
         Drag & Upload File Here
@@ -46,3 +54,4 @@ export default function DropZone({ onFileSelect, resetTrigger }: props) {
     </>
   );
 }
+export default React.memo(DropZone)

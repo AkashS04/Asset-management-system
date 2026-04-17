@@ -27,8 +27,12 @@ export default function AddAssetForm({
 
   const submitHandler = (data: AssetFormData) => {
     onSubmit(data);
-    if (mode === "add") reset();
   };
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  e.stopPropagation();
+  handleSubmit(submitHandler)(e);
+};
 
   const isEdit = mode === "edit";
 
@@ -40,7 +44,7 @@ export default function AddAssetForm({
 
   return (
     <>
-        <form onSubmit={handleSubmit(submitHandler)}>
+        <form onSubmit={handleFormSubmit}>
           <h2 className="text-xl font-semibold mb-3">
             {isEdit ? "Edit Asset" : "Add Asset"}
           </h2>

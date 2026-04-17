@@ -1,5 +1,5 @@
 interface ModalProps {
-  isOpen: Boolean;
+  isOpen:boolean;
   onClose: () => void;
   children: React.ReactNode;
 }
@@ -8,9 +8,9 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
   return (
     <>
       <div className="fixed inset-0 bg-black/40 flex justify-center items-center">
-        <div className="bg-white p-5 ronded w-[500px]">
+        <div className="bg-white p-5 rounded w-[500px]">
             <div className="flex justify-end">
-          <button className="cursor-pointer color-gray-500" onClick={onClose}>X</button>
+          <button type="button" className="cursor-pointer text-gray-500" onClick={onClose}>✖</button>
           </div>
           {children}
         </div>

@@ -9,6 +9,7 @@ import {
   selectIsAuthenticated,
 } from "../features/auth/authSlice";
 import { useEffect } from "react";
+import IntroModal from "../components/intro/IntroModal";
 
 export default function LoginPage() {
   const dispatch = useAppDispatch();
@@ -31,6 +32,7 @@ export default function LoginPage() {
   };
   return (
     <div className="flex justify-center items-center h-[100dvh]">
+      <IntroModal></IntroModal>
       <div className="">
       <LoginForm onSubmit={handleSubmit} credentialError={error} loading={loading} />
       </div>

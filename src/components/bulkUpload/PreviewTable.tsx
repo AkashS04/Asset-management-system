@@ -1,4 +1,6 @@
-export default function PreviewTable({ data }: any) {
+import React from "react";
+
+const PreviewTable = ({ data }: any)=> {
   return (
     <>
       <table className="w-lg border border-gray-300 my-4">
@@ -24,3 +26,5 @@ export default function PreviewTable({ data }: any) {
     </>
   );
 }
+
+export default React.memo(PreviewTable)

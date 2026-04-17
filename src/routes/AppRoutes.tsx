@@ -21,16 +21,18 @@ function AuthExpireWatcher() {
   useEffect(() => {
     const handle = () => {
       dispatch(logout());
+        window.__AUTH_EXPIRED__ = false;
       navigate("/login", { replace: true });
     };
     window.addEventListener("auth:expired", handle);
-    return () => window.removeEventListener("auth.expired", handle);
+    return () => window.removeEventListener("auth:expired", handle);
   }, [dispatch, navigate]);
   return null;
 }
 const AppRoutes = () => {
   return (
     <BrowserRouter>
+
       <AuthExpireWatcher />
       <Routes>
         <Route path="/login" element={<LoginPage />} />

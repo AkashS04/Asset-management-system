@@ -1,21 +1,14 @@
-import { useEffect } from "react";
 import AssetTable from "../components/asset/table/AssetTable";
 import StatusCard from "../components/dashboard/StatusCard";
 import StatusPieChart from "../components/dashboard/StatusPieChart";
 import TypeBarChart from "../components/dashboard/TypeBarChart";
 import { useDashBoardData } from "../features/dashboard/useDashboardData";
-import { fetchAssets } from "../features/assets/assetThunk";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { useAppSelector } from "../app/hooks";
+import { useInitAssets } from "../features/assets/useInitAssets";
 
 export default function DashBoardPage() {
-  const dispatch = useAppDispatch();
-
   const { assets } = useAppSelector((state: any) => state.assets);
-  useEffect(() => {
-    if (assets.length == 0) {
-      dispatch(fetchAssets());
-    }
-  }, [dispatch, assets]);
+  useInitAssets();
 
   const {
     total,

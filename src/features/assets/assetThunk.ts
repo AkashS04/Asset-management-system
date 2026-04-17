@@ -28,16 +28,15 @@ export const addAsset = createAsyncThunk(
 
 export const bulkAsset = createAsyncThunk(
   "assets/bulkAsset",
-  async (asset:AssetFormData[],{rejectWithValue})=>{
-    try{
+  async (asset: AssetFormData[], { rejectWithValue }) => {
+    try {
       const res = await assetAPI.bulkAsset(asset);
       return res;
+    } catch (err: any) {
+      return rejectWithValue(err.message || "Upload Failed");
     }
-    catch(err:any){
-      return rejectWithValue(err.message || "Upload Failed")
-    }
-  }
-)
+  },
+);
 
 export const updateAsset = createAsyncThunk(
   "assets/updateAsset",
@@ -52,14 +51,13 @@ export const updateAsset = createAsyncThunk(
 );
 
 export const deleteAsset = createAsyncThunk(
-    "assets/deleteAsset",
-    async(id:number, {rejectWithValue})=>{
-        try{
-            const res = await assetAPI.deleteAsset(id);
-            return res
-        }
-        catch(err:any){
-            return rejectWithValue(err.message)
-        }
+  "assets/deleteAsset",
+  async (id: number, { rejectWithValue }) => {
+    try {
+      await assetAPI.deleteAsset(id);
+      return id;
+    } catch (err: any) {
+      return rejectWithValue(err.message);
     }
-)
+  },
+);

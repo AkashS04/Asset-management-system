@@ -33,7 +33,7 @@ const SideNav = () => {
       </div>
 
       <div className="">
-        <button className="hover:bg-slate-700 px-3 py-2 w-full text-start rounded-md cursor-pointer" onClick={()=> dispatch(logout())}>
+        <button type="button" className="hover:bg-slate-700 px-3 py-2 w-full text-start rounded-md cursor-pointer" onClick={()=> dispatch(logout())}>
           Logout
         </button>
       </div>

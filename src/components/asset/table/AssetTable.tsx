@@ -1,3 +1,4 @@
+import { memo } from "react";
 import type { Asset } from "../../../types/assetTypes";
 
 interface props {
@@ -6,12 +7,14 @@ interface props {
   onEdit: (asset: Asset) => void;
   showActions: boolean;
 }
-export default function AssetTable({
+
+const AssetTable = memo(function AssetTable({
   assets,
   handleDelete,
   onEdit,
   showActions,
 }: props) {
+
   return (
     <>
       <table className="w-full border border-gray-300">
@@ -55,11 +58,12 @@ export default function AssetTable({
               </td>
               {showActions && (
                 <>
-                  {" "}
                   <td className="border border-gray-300 p-2 text-center   ">
                     <button
+                    type="button"
                       className="underline text-blue-500 cursor-pointer"
-                      onClick={() => {
+                      onClick={(e) => {
+                         e.stopPropagation(); 
                         onEdit?.(asset);
                       }}
                     >
@@ -68,8 +72,9 @@ export default function AssetTable({
                   </td>
                   <td className="border border-gray-300 p-2 text-center  text-red-500">
                     <button
+                    type="button"
                       className="cursor-pointer"
-                      onClick={() => handleDelete?.(asset.id)}
+                      onClick={(e) =>{  e.stopPropagation();  handleDelete?.(asset.id)}}
                     >
                       Delete
                     </button>
@@ -82,4 +87,5 @@ export default function AssetTable({
       </table>
     </>
   );
-}
+});
+export default AssetTable;
