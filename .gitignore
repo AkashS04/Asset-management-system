@@ -7,16 +7,38 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+dist-ssr/
+build/
+
+# Env files (VERY IMPORTANT)
+.env
+.env.*
 *.local
 
-# Editor directories and files
+# JSON Server DB (optional decision 👇)
+# If you DON'T want to push your mock DB:
+# backend/db.json
+
+# If you WANT demo data on GitHub → comment above line ❌
+
+# Vite cache
+.vite/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
+
+# Misc
 *.suo
 *.ntvs*
 *.njsproj
