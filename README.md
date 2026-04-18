@@ -1,73 +1,225 @@
-# React + TypeScript + Vite
+# 🚀 Asset Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern **Asset Management Web Application** built using **React + TypeScript + Redux Toolkit**, with a mock backend powered by **JSON Server**.
 
-Currently, two official plugins are available:
+This application allows users to manage assets efficiently with features like create, update, delete, bulk upload, and dashboard analytics.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🧠 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* ✅ Add / Edit / Delete Assets
+* 📊 Dashboard with charts (Status & Type)
+* 📁 Bulk Upload via Excel (.xlsx)
+* 🔍 Real-time validation using React Hook Form
+* 🔐 Basic Authentication (Mock)
+* ⚡ Optimized rendering using memoization
+* 🧩 Modular & scalable architecture
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🏗️ Project Structure
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+asset-management-system/
+│
+├── frontend/        # React + Vite App
+│   ├── src/
+│   ├── public/
+│   ├── package.json
+│   └── .env
+│
+├── backend/         # JSON Server (Mock API)
+│   ├── db.json
+│   ├── package.json
+│
+└── README.md
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ⚙️ Tech Stack
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Frontend
+
+* React (Vite)
+* TypeScript
+* Redux Toolkit
+* React Hook Form
+* Tailwind CSS
+* Chart.js / Recharts
+
+### Backend (Mock)
+
+* JSON Server
+
+---
+
+## 🔧 Setup Instructions
+
+### 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/asset-management-system.git
+cd asset-management-system
 ```
+
+---
+
+### 2️⃣ Setup Backend (JSON Server)
+
+```bash
+cd backend
+npm install
+npm run server
+```
+
+Server runs at:
+
+```
+http://localhost:5000
+```
+
+---
+
+### 3️⃣ Setup Frontend
+
+```bash
+cd ../frontend
+npm install
+npm run dev
+```
+
+App runs at:
+
+```
+http://localhost:5173
+```
+
+---
+
+## 🔐 Environment Variables
+
+Create a `.env` file inside `frontend/`:
+
+```
+VITE_API_URL=http://localhost:5000
+```
+
+---
+
+## 📦 Available Scripts
+
+### Frontend
+
+```bash
+npm run dev       # Start development server
+npm run build     # Build for production
+npm run preview   # Preview build
+```
+
+### Backend
+
+```bash
+npm run server    # Start JSON Server
+```
+
+---
+
+## 📊 Dashboard Overview
+
+* Total Assets
+* Assigned / Available / Repaired / Returned
+* Pie Chart (Status)
+* Bar Chart (Type)
+
+---
+
+## 📁 Bulk Upload
+
+* Upload `.xlsx` files
+* Auto validation
+* Preview before submission
+* Error reporting
+
+---
+
+## 🚀 Deployment
+
+### Frontend (GitHub Pages / Netlify / Vercel)
+
+1. Build project:
+
+```bash
+npm run build
+```
+
+2. Deploy `dist/` folder
+
+---
+
+### ⚠️ Backend Note
+
+JSON Server is **not suitable for production**.
+
+For real deployment:
+
+* Replace with:
+
+  * Node.js + Express
+  * Firebase
+  * Supabase
+  * MongoDB / PostgreSQL
+
+---
+
+## 🧪 Demo Credentials
+
+```
+Email: admin@example.com
+Password: 123456
+```
+
+---
+
+## 🧠 Architecture Highlights
+
+* Feature-based folder structure
+* Separation of concerns
+* Reusable UI components
+* API abstraction layer (Axios)
+* Optimized rendering (React.memo, useCallback)
+
+---
+
+## ⚠️ Known Limitations
+
+* Uses mock backend (JSON Server)
+* No real authentication
+* Data resets if backend restarts
+
+---
+
+## 📌 Future Improvements
+
+* 🔐 JWT Authentication
+* 🌐 Real Backend Integration
+* 📱 Mobile Responsiveness Enhancement
+* 🧪 Unit & E2E Testing
+* ☁️ Cloud Deployment
+
+---
+
+## 👨‍💻 Author
+
+**Akash S**
+
+Frontend Developer (React + TypeScript)
+
+---
+
+## ⭐ Support
+
+If you like this project, give it a ⭐ on GitHub!
+
+---
