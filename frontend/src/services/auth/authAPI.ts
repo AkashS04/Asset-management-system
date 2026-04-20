@@ -13,6 +13,9 @@ token: string
 export const LoginAPI = async (email: string, password: string): Promise<LoginResult> => {
   const { data } = await apiClient.get<(User & { password: string })[]>("/users");
 
+  console.log("loginApi response", data);
+  console.log("is Array", Array.isArray(data))
+
   const user = data.find(
     (u) => u.email === email.trim() && u.password === password
   );

@@ -21,31 +21,33 @@ export default function LoginForm({
     formState: { errors },
   } = useForm<LoginFormInputs>();
   return (
-    <div className="bg-sky-100 p-8 rounded-lg border-hidden">
+    <div className="bg-sky-100 p-8 rounded-lg border-hidden login-div">
       <h3 className="text-center text-xl mb-4">DEMO-ASM LOGIN</h3>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-4 w-80 "
       >
-        <div className="flex flex-col mb-2 h-[70px]">
+        <div className="flex flex-col mb-3 h-[95px]">
+          <label htmlFor="email" className="text-gray-800 mb-1">Email:</label>
           <input
             type="email"
             className="bg-white py-4 px-2 border-gray-300 focus-visible:outline-none"
-            placeholder="Email"
+            placeholder="Enter the email"
             {...register("email", {
               required: "Email is required",
               setValueAs: (v) => v.trim(),
             })}
           />
           {errors.email && (
-            <p className="text-red-500 text-sm">{errors.email.message}</p>
+            <p className="text-red-500 text-sm pt-1">{errors.email.message}</p>
           )}
         </div>
-        <div className="flex flex-col mb-2 h-[70px]">
+        <div className="flex flex-col mb-3 h-[95px]">
+          <label htmlFor="password" className="text-gray-800 mb-1">Password:</label>
           <input
             type="password"
             className="bg-white py-4 px-2 border-gray-300 focus-visible:outline-none"
-            placeholder="Password"
+            placeholder="Enter the password"
             {...register("password", {
               required: "Password is required",
               minLength: {
@@ -55,11 +57,11 @@ export default function LoginForm({
             })}
           />
           {errors.password && (
-            <p className="text-red-500 text-sm">{errors.password.message}</p>
+            <p className="text-red-500 text-sm pt-1">{errors.password.message}</p>
           )}
         </div>
         {credentialError && (
-          <p className="text-red-500 text-sm text-center">{credentialError}</p>
+          <p className="text-red-500 text-sm pt-1 text-center">{credentialError}</p>
         )}
 
         <button

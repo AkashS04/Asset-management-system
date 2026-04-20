@@ -10,6 +10,7 @@ import {
 } from "../features/auth/authSlice";
 import { useEffect } from "react";
 import IntroModal from "../components/intro/IntroModal";
+import toast from "react-hot-toast";
 
 export default function LoginPage() {
   const dispatch = useAppDispatch();
@@ -27,8 +28,12 @@ export default function LoginPage() {
   const handleSubmit = async (data: { email: string; password: string }) => {
     try {
       await dispatch(loginThunk(data)).unwrap();
+      sessionStorage.setItem("uploadCount", "0");
       navigate("/dashboard", { replace: true });
-    } catch {}
+    } catch(err) {
+      toast.error("Login Failed" , { icon: "❌"})
+      console.log(err)
+    }
   };
   return (
     <div className="flex justify-center items-center h-[100dvh]">

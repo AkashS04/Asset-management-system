@@ -11,7 +11,6 @@ const BulkUpload = ({ onUpload }: any) => {
   const [uploading, setUploading] = useState<boolean>(false);
   const [resetKey, setResetKey] = useState(0)
   const isProcessingRef = useRef(false);
-
   const processFile = useCallback((file: File) => {
     if (isProcessingRef.current) return;
     isProcessingRef.current = true;
@@ -23,6 +22,13 @@ const BulkUpload = ({ onUpload }: any) => {
       const workbook = XLSX.read(data, { type: "binary" });
       const sheet = workbook.Sheets[workbook.SheetNames[0]];
       const raw = XLSX.utils.sheet_to_json<any>(sheet) || [];
+
+      if (raw.length > 20) {
+        alert("Maxiumum 20 entires allowed per upload");
+        isProcessingRef.current = false;
+        setLoading(false);
+        return;
+      }
 
       const errorList: any[] = [];
 
@@ -38,7 +44,6 @@ const BulkUpload = ({ onUpload }: any) => {
         }
 
         return {
-          id: crypto.randomUUID(),
           name: item.name || "",
           type: item.type || "",
           status: item.status || "Available",
@@ -48,6 +53,24 @@ const BulkUpload = ({ onUpload }: any) => {
         };
       });
 
+      const uniqueSet = new Set();
+
+
+      const hasDuplicate = formatted.some(item => {
+        const key = `${item.name}-${item.type}-${item.status}-${item.assignedTo}`;
+
+        if (uniqueSet.has(key)) return true;
+        uniqueSet.add(key);
+        return false;
+      });
+
+      if (hasDuplicate) {
+        alert("Duplicate assets found (all fields same)");
+        isProcessingRef.current = false;
+        setLoading(false);
+        return
+      }
+
       setPreview(formatted);
       setErrors(errorList);
       isProcessingRef.current = false;
@@ -56,6 +79,8 @@ const BulkUpload = ({ onUpload }: any) => {
 
     reader.readAsBinaryString(file);
   }, []);
+
+
   const handleCancel = useCallback(() => {
     setPreview([]);
     setErrors([]);
@@ -65,13 +90,29 @@ const BulkUpload = ({ onUpload }: any) => {
 
   const handleConfirm = useCallback(async () => {
     if (uploading) return;
+
+    const uploadCount = Number(sessionStorage.getItem("uploadCount") || 0);
+
+    if (uploadCount >= 2) {
+      alert("Upload limit reached (Max 2 uploads)");
+      handleCancel();
+      return;
+    }
+
     setUploading(true);
+
     try {
       await onUpload(preview);
+
+      sessionStorage.setItem("uploadCount", String(uploadCount + 1));
+
       handleCancel();
     } catch (err) {
       console.error("Upload failed", err);
-      setErrors(prev => [...prev, { row: 0, message: "Upload failed. Please try again." }]);
+      setErrors(prev => [
+        ...prev,
+        { row: 0, message: "Upload failed. Please try again." }
+      ]);
     } finally {
       setUploading(false);
     }
@@ -82,7 +123,7 @@ const BulkUpload = ({ onUpload }: any) => {
   return (
     <div className="mb-4">
       <DropZone onFileSelect={processFile} resetTrigger={resetKey} />
-      {(loading || uploading) && <p>{uploading ? "Processing File..." : "Processing File..."}</p>}
+      {(loading || uploading) && <p className="text-gray-700 p-10">{uploading ? "Processing File..." : "Processing File..."}</p>}
       {errors?.length > 0 && <ErrorReport errors={errors} />}
       {preview?.length > 0 && <PreviewTable data={preview} />}
       {preview?.length > 0 && (

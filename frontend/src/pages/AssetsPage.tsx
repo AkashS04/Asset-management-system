@@ -51,7 +51,7 @@ const AssetsPage = () => {
         toast.success("Asset added successfully", { icon: "✅" });
         setOpen(false);
       } catch (err) {
-        toast.error("Failed to add asset",{ icon: "❌" });
+        toast.error("Failed to add asset", { icon: "❌" });
       }
     },
     [dispatch],
@@ -74,7 +74,7 @@ const AssetsPage = () => {
     try {
       await dispatch(deleteAsset(deleteId)).unwrap();
       setDeleteId(null);
-      toast.success("Asset deleted sucessfully",{ icon: "✅" } );
+      toast.success("Asset deleted sucessfully", { icon: "✅" });
     } catch (err) {
       toast.error("Failed to delete asset", { icon: "❌" })
     }
@@ -224,15 +224,16 @@ const AssetsPage = () => {
 
       {fetchLoading && !initialized && <div>Loading...</div>}
       {Error && <div className="text-red">{Error}</div>}
-      {!fetchLoading && assets.length === 0 && initialized && (
-        <div className="text-gray:600">No Assets Found</div>
-      )}
+
       <AssetTable
         assets={processedAssets}
         handleDelete={handleDelete}
         onEdit={setEditingAsset}
         showActions={true}
       />
+      {!fetchLoading && assets.length === 0 && initialized && (
+        <div className="text-gray-500 text-center p-10">No Assets Found</div>
+      )}
 
       <ConfirmModal
         isOpen={deleteId !== null}

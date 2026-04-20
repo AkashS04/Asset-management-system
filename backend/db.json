@@ -1,5 +1,42 @@
 {
-  "assets": [],
+  "assets": [
+    {
+      "name": "HP",
+      "type": "Printer",
+      "status": "Repaired",
+      "assignedTo": "Null",
+      "createdAt": "2026-04-20T05:07:30.727Z",
+      "updatedAt": "2026-04-20T05:07:30.727Z",
+      "id": 1
+    },
+    {
+      "name": "HP",
+      "type": "Laptop",
+      "status": "Assigned",
+      "assignedTo": "Tamil",
+      "createdAt": "2026-04-20T05:07:30.727Z",
+      "updatedAt": "2026-04-20T05:07:30.727Z",
+      "id": 2
+    },
+    {
+      "name": "Dell",
+      "type": "Server",
+      "status": "Assigned",
+      "assignedTo": "Akash",
+      "createdAt": "2026-04-20T05:07:30.727Z",
+      "updatedAt": "2026-04-20T05:07:30.727Z",
+      "id": 4
+    },
+    {
+      "name": "Lenovo",
+      "type": "Server",
+      "status": "Assigned",
+      "assignedTo": "Akash",
+      "createdAt": "2026-04-20T05:07:30.727Z",
+      "updatedAt": "2026-04-20T05:07:30.727Z",
+      "id": 5
+    }
+  ],
   "users": [
     {
       "id": "1",
