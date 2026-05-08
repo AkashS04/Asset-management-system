@@ -21,6 +21,8 @@ export default function AddAssetForm({
   const {
     register,
     handleSubmit,
+    control,
+    setValue,
     formState: { errors },
     reset,
   } = useForm<AssetFormData>({ defaultValues });
@@ -48,7 +50,7 @@ export default function AddAssetForm({
           <h2 className="text-xl font-semibold mb-3">
             {isEdit ? "Edit Asset" : "Add Asset"}
           </h2>
-          <AddAssetFormFields register={register} errors={errors} />
+          <AddAssetFormFields register={register} errors={errors} control={control} setValue={setValue} />
           <div className="flex justify-end gap-2 mt-2">
             <button
               type="submit"

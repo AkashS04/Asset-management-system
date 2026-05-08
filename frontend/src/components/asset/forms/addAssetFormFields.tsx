@@ -1,11 +1,23 @@
-import type { FieldErrors, UseFormRegister } from "react-hook-form";
+import { useWatch, type FieldErrors, type UseFormRegister, type Control, type UseFormSetValue } from "react-hook-form";
 import { addAssetValidation } from "../../../validations/assets/addAssetValidaiton";
+import { useEffect } from "react";
 
 type props = {
   register: UseFormRegister<any>;
   errors: FieldErrors;
+  control: Control<any>;
+  setValue:UseFormSetValue<any>
 };
-export default function AddAssetFormFields({ register, errors }: props) {
+export default function AddAssetFormFields({ register, errors, control,setValue }: props) {
+
+  const status = useWatch({ control, name: "status", defaultValue: "Available" })
+
+  useEffect(()=>{
+    if(['Available','Repaired'].includes(status)){
+      setValue("assignedTo","NILL")
+    }
+  })
+
   return (
     <>
       <div className="mb-4 h-[55px]">
@@ -21,14 +33,17 @@ export default function AddAssetFormFields({ register, errors }: props) {
         )}
       </div>
       <div className="mb-4 h-[55px]">
-        <input
-          {...register("type", addAssetValidation.type)}
-          placeholder="Asset type"
-          className="w-full p-2 border border-gray-300 focus-visible:outline-none "
-        />
-        {errors.type && (
+        <select {...register("type", addAssetValidation.type)} className="w-full p-2 border border-gray-300 focus-visible:outline-none ">
+          <option value="Server">Server</option>
+          <option value="Monitor">Monitor</option>
+          <option value="Keyboard">Keyboard</option>
+          <option value="Mouse">Mouse</option>
+          <option value="Laptop">Laptop</option>
+          <option value="Printer">Printer</option>
+        </select>
+        {errors.status && (
           <p className="text-red-500 text-sm">
-            {errors.type.message as string}
+            {errors.status.message as string}
           </p>
         )}
       </div>
@@ -45,14 +60,15 @@ export default function AddAssetFormFields({ register, errors }: props) {
           </p>
         )}
       </div>
-      <div className="mb-4 h-[55px]">
-        <input {...register("assignedTo",addAssetValidation.assignedTo)} placeholder="Assigned person" className="w-full p-2 border border-gray-300 focus-visible:outline-none "/>
+      {status !== "Available" && status !== "Repaired" && <div className="mb-4 h-[55px]">
+        <input {...register("assignedTo", addAssetValidation.assignedTo)} placeholder="Assigned person" className="w-full p-2 border border-gray-300 focus-visible:outline-none " />
         {errors.assignedTo && (
           <p className="text-red-500 text-sm">
             {errors.assignedTo.message as string}
           </p>
         )}
-      </div>
+      </div>}
+
     </>
   );
 }
